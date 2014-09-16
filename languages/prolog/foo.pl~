@@ -1,0 +1,10 @@
+adjacent(1,2).
+adjacent(2,3).
+adjacent(3,4).
+connected(A, B) :-
+    adjacent(A, B).
+connected(A, B) :-
+    adjacent(A, C),
+    connected(C, B).
+
+hello_world :- write('hello world!').

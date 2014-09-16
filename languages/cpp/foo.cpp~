@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+
+int main(int nargs, char* args[]) {
+  if (nargs > 1) {
+    size_t nchars = strlen(args[1]) + 1;
+    wchar_t wcstring[nchars];
+    mbstowcs(wcstring, args[1], nchars);
+
+    // NOTE: I *think* the 3x is required because the
+    // wchar_t has more bits per character than ASCII, but those bits
+    // get padded with zeros since the input was valid ASCII.
+    string back_to_str((char*)wcstring, 3*nchars);
+    //wstring back_to_str(wcstring);
+
+    cout << "original char*:" << args[1] << endl;
+    wcout << "raw wchat_t:" << wcstring << endl;  // prints weird binary - I guess wchar_t doesnt play well w cout
+    cout << "wchar_t back to string:" << back_to_str << endl;
+  }
+}
